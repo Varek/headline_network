@@ -1,5 +1,6 @@
 # Dockerfile.rails
-FROM ruby:3.3.2 AS rails-toolbox
+ARG RUBY_VERSION=3.3.2
+FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim AS rails-toolbox
 
 # Default directory
 ENV INSTALL_PATH /opt/app
