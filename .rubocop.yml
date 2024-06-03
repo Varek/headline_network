@@ -11,6 +11,9 @@ require:
 Style/Documentation:
   Enabled: false
 
+Rails/I18nLocaleTexts:
+  Enabled: false
+
 # Global options, like Ruby version
 AllCops:
   SuggestExtensions: false
