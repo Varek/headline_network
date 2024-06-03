@@ -1,0 +1,45 @@
+services:
+
+  postgres:
+    image: postgres:16.3
+    environment:
+      POSTGRES_USER: headline_network
+      POSTGRES_PASSWORD: db_password
+    ports:
+      - '5432:5432'
+    volumes:
+      - headline-network-postgres:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.2.5
+    ports:
+      - '6379:6379'
+    volumes:
+      - headline-network-redis:/var/lib/redis/data
+
+  web:
+    build:
+      context: .
+    volumes:
+      - .:/opt/app
+    links:
+      - postgres
+      - redis
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+
+  sidekiq:
+    build:
+      context: .
+    command: bundle exec sidekiq
+    links:
+      - postgres
+      - redis
+    env_file:
+      - .env
+
+volumes:
+  headline-network-postgres:
+  headline-network-redis:
