@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema[7.1].define(version: 2024_06_03_164347) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "headlines", force: :cascade do |t|
@@ -20,6 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_03_164347) do
     t.string "level", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["content"], name: "index_headlines_on_content", opclass: :gin_trgm_ops, using: :gin
     t.index ["member_id"], name: "index_headlines_on_member_id"
   end
 

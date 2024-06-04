@@ -57,6 +57,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri windows]
   gem 'erb_lint', require: false
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'rubocop-performance', require: false

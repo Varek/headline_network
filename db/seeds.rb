@@ -9,3 +9,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+10.times do |i|
+  member = Member.create!(name: Faker::Name.name, website_url: Faker::Internet.url)
+  (11*SecureRandom.random_number(i+2)).times do
+    member.headlines.create!(content: Faker::Lorem.sentence, level: %w(h1 h2 h3).sample)
+  end
+end

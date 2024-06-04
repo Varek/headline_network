@@ -17,6 +17,9 @@ Rails/I18nLocaleTexts:
 RSpec/ExampleLength:
   Max: 25
 
+RSpec/IndexedLet:
+  Enabled: false
+
 # Global options, like Ruby version
 AllCops:
   SuggestExtensions: false
