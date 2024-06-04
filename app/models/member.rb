@@ -7,4 +7,29 @@ class Member < ApplicationRecord
   has_many :headlines, dependent: :destroy
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
+
+  def shortest_connection_to(other_member) # rubocop:disable Metrics/MethodLength
+    return [self] if self == other_member
+
+    visited = {}
+    queue = [[self]]
+
+    while queue.any?
+      path = queue.shift
+      current_member = path.last
+
+      next unless visited[current_member.id].nil?
+
+      visited[current_member.id] = true
+
+      current_member.friends.each do |friend|
+        new_path = path + [friend]
+        return new_path if friend == other_member
+
+        queue << new_path
+      end
+    end
+
+    [] # No connection found
+  end
 end

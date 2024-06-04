@@ -14,15 +14,15 @@
   <% end %>
   <div>
     <%= form.label :member_id, "Select Member", style: "display: block" %>
-    <%= form.select :member_id, options_from_collection_for_select(@members, :id, :name) %>
+    <%= form.select :member_id, options_from_collection_for_select(@members, :id, :name, @friendship.member_id),include_blank: true %>
   </div>
   <div>
     <%= form.label :friend_id, "Select Friend", style: "display: block" %>
-    <%= form.select :friend_id, options_from_collection_for_select(@members, :id, :name) %>
+    <%= form.select :friend_id, options_from_collection_for_select(@members, :id, :name, @friendship.friend_id), include_blank: true  %>
   </div>
   <div>
     <%= form.submit "Create Friendship" %>
   </div>
 <% end %>
 
-<%= link_to 'Back', root_path %>
+<%= link_to 'Back', :back %>

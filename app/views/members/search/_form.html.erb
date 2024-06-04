@@ -1,0 +1,5 @@
+<%= form_tag(member_search_path(member)) do %>
+  <%= label_tag :search, "Search for:" %>
+  <%= search_field_tag :search, params[:search] %>
+  <%= submit_tag "Search" %>
+<% end%>

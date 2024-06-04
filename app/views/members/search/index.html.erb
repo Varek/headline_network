@@ -1,0 +1,36 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Headline friends search from <%= @member.name %></h1>
+
+<%= render partial: 'form', locals:{member: @member}%>
+
+<% if params[:search].present? %>
+  <h2>Results for "<%= params[:search]%>"</h2>
+  <% if @headlines.present? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Headline </th>
+          <th>Member</th>
+          <th>Shortest Connection</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @headlines.each do |headline|  %>
+          <tr>
+            <td><%= headline.content %></td>
+            <td><%= link_to headline.member.name, headline.member %></td>
+            <td><%= @shortest_connections[headline.member_id] %></td>
+            <td><%= link_to "Befriend", new_friendship_path(member_id: @member.id, friend_id: headline.member) %></td>
+          </tr>
+        <% end%>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No headlines found!</p>
+  <% end%>
+<% end%>
+
+
+<%= link_to "Back to member", @member %>

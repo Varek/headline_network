@@ -5,7 +5,9 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
 
-  resources :members
+  resources :members do
+    match "search" => 'members/search#index', as: 'search', via: [:get, :post]
+  end
   resources :friendships, only: [:new, :create, :destroy]
   match "/" => 'search#index', as: 'search', via: [:get, :post]
 

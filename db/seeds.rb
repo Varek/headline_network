@@ -15,3 +15,11 @@
     member.headlines.create!(content: Faker::Lorem.sentence, level: %w(h1 h2 h3).sample)
   end
 end
+member_count = Member.count
+Member.all.each do |member|
+  SecureRandom.random_number(member_count/2).times do
+    potential_friend = Member.where.not(id: Friendship.where(member_id: member.id).pluck(:friend_id) << member.id).sample
+    break if potential_friend.nil?
+    member.friendships.create!(friend: potential_friend)
+  end
+end
