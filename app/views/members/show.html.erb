@@ -4,7 +4,9 @@
 
 <div>
   <%= link_to "Edit this member", edit_member_path(@member) %> |
+  <%= link_to "Add Friendship with member", new_friendship_path(member_id: @member.id) %> |
   <%= link_to "Back to members", members_path %>
-
-  <%= button_to "Destroy this member", @member, method: :delete %>
+</div>
+<div>
+  <%= button_to "Destroy this member", @member, method: :delete, form: {data: {turbo_confirm: "Are you sure?" }}  %>
 </div>

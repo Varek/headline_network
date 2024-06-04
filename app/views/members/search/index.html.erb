@@ -22,7 +22,10 @@
             <td><%= headline.content %></td>
             <td><%= link_to headline.member.name, headline.member %></td>
             <td><%= @shortest_connections[headline.member_id] %></td>
-            <td><%= link_to "Befriend", new_friendship_path(member_id: @member.id, friend_id: headline.member) %></td>
+            <td>
+              <% unless Friendship.exists?({member_id: @member.id, friend_id: headline.member}) %>
+                <%= link_to "Befriend", new_friendship_path(member_id: @member.id, friend_id: headline.member) %>
+              <% end  %></td>
           </tr>
         <% end%>
       </tbody>

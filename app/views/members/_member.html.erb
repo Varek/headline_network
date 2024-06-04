@@ -19,10 +19,10 @@
   </p>
 
   <p>
-    <strong>Friends(<%= member.friends.count%>):</strong>
+    <strong>Friends(<%= member.friendships.count%>):</strong>
     <ul>
-      <% member.friends.each do |friend| %>
-        <li><%= link_to friend.name, friend %>
+      <% member.friendships.each do |friendship| %>
+        <li><%= link_to friendship.friend.name, friendship.friend %> (<%= link_to "Remove Friend", friendship_path(friendship), data: {turbo_method: :delete, turbo_confirm: "Are you sure?" } %>)</li>
       <%end%>
     </ul>
   </p>

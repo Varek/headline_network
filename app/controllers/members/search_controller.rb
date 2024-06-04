@@ -9,13 +9,7 @@ module Members
 
       @headlines = Headline.includes(:member).search_by_content(params[:search])
                            .where.not(member_id: @member.id)
-      @shortest_connections = {}
-      @headlines.each do |headline|
-        next if @shortest_connections[headline.member_id].present?
-
-        @shortest_connections[headline.member_id] =
-          @member.shortest_connection_to(headline.member).map(&:name).join(' -> ')
-      end
+      preload_shortest_connections
     end
 
     private
@@ -23,6 +17,16 @@ module Members
     # Use callbacks to share common setup or constraints between actions.
     def set_member
       @member = Member.find(params[:member_id])
+    end
+
+    def preload_shortest_connections
+      @shortest_connections = {}
+      @headlines.each do |headline|
+        next if @shortest_connections[headline.member_id].present?
+
+        @shortest_connections[headline.member_id] =
+          @member.shortest_connection_to(headline.member).map(&:name).join(' -> ')
+      end
     end
   end
 end
