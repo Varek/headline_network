@@ -63,6 +63,12 @@ RSpec.describe '/members' do
         post members_url, params: { member: valid_attributes }
         expect(response).to redirect_to(member_url(Member.last))
       end
+
+      it 'schedules a CollectHeadlinesJob' do
+        ActiveJob::Base.queue_adapter = :test
+        post members_url, params: { member: valid_attributes }
+        expect(CollectHeadlinesJob).to have_been_enqueued
+      end
     end
 
     context 'with invalid parameters' do

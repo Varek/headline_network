@@ -2,13 +2,24 @@
 
 <h1>Members</h1>
 
-<div id="members">
-  <% @members.each do |member| %>
-    <%= render member %>
-    <p>
-      <%= link_to "Show this member", member %>
-    </p>
-  <% end %>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Website Url</th>
+      <th>Website Headlines Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td><%= link_to member.name, member%></td>
+        <td><%= member.website_url %></td>
+        <td><%= @member_headlines_count[member.id] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
 <%= link_to "New member", new_member_path %>

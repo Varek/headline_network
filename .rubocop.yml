@@ -14,6 +14,9 @@ Style/Documentation:
 Rails/I18nLocaleTexts:
   Enabled: false
 
+RSpec/ExampleLength:
+  Max: 25
+
 # Global options, like Ruby version
 AllCops:
   SuggestExtensions: false

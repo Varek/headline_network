@@ -7,4 +7,8 @@ RSpec.describe Member do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:website_url) }
   end
+
+  describe 'associations' do
+    it { is_expected.to have_many(:headlines) }
+  end
 end

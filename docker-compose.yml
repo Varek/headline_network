@@ -33,6 +33,8 @@ services:
   sidekiq:
     build:
       context: .
+    volumes:
+      - .:/opt/app
     command: bundle exec sidekiq
     links:
       - postgres

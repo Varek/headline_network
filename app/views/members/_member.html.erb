@@ -9,4 +9,13 @@
     <%= member.website_url %>
   </p>
 
+  <p>
+    <strong>Website Headlines(<%= member.headlines.count%>):</strong>
+    <ul>
+      <% member.headlines.each do |headline| %>
+        <li><%= headline.content %> (<%= headline.level%>)
+      <%end%>
+    </ul>
+  </p>
+
 </div>
