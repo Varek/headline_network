@@ -18,4 +18,13 @@
     </ul>
   </p>
 
+  <p>
+    <strong>Friends(<%= member.friends.count%>):</strong>
+    <ul>
+      <% member.friends.each do |friend| %>
+        <li><%= link_to friend.name, friend %>
+      <%end%>
+    </ul>
+  </p>
+
 </div>

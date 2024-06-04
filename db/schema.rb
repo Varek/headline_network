@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_03_164347) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_04_115215) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
+
+  create_table "friendships", force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.bigint "friend_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["member_id", "friend_id"], name: "index_friendships_on_member_id_and_friend_id", unique: true
+    t.index ["member_id"], name: "index_friendships_on_member_id"
+  end
 
   create_table "headlines", force: :cascade do |t|
     t.bigint "member_id", null: false
@@ -32,5 +42,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_03_164347) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "friendships", "members"
+  add_foreign_key "friendships", "members", column: "friend_id"
   add_foreign_key "headlines", "members"
 end

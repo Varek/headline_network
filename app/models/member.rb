@@ -5,4 +5,6 @@ class Member < ApplicationRecord
   validates :website_url, presence: true, url: true
 
   has_many :headlines, dependent: :destroy
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
 end

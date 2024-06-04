@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
 
   resources :members
+  resources :friendships, only: [:new, :create, :destroy]
   match "/" => 'search#index', as: 'search', via: [:get, :post]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

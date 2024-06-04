@@ -10,5 +10,7 @@ RSpec.describe Member do
 
   describe 'associations' do
     it { is_expected.to have_many(:headlines) }
+    it { is_expected.to have_many(:friendships) }
+    it { is_expected.to have_many(:friends).through(:friendships) }
   end
 end
