@@ -9,6 +9,7 @@ class Member < ApplicationRecord
   has_many :friends, through: :friendships
 
   def shortest_connection_to(other_member) # rubocop:disable Metrics/MethodLength
+    # Breadth-first search to find the shortest connection between two members
     return [self] if self == other_member
 
     visited = {}
